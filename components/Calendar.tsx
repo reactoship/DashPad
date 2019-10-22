@@ -1,12 +1,13 @@
 import React from 'react'
 import { View, Text } from 'react-native'
+import styles from '../Styles'
 
-const Clock = (props) => {
+const Calendar = () => {
   return (
-    <View style={props.style}>
-      <Text>This is a Clock</Text>
+    <View style={styles.widget}>
+      <Text style={styles.themedText}>This is a Calendar</Text>
     </View>
   )
 }
 
-export default Clock
+export default Calendar
