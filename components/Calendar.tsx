@@ -16,21 +16,29 @@ const getCalendar = async () => {
   fourDaysOut.setDate(day.getDate() + 4);
 
   const upcoming = await calendar.getEventsAsync(calendarIDs, day, fourDaysOut);
-
+  // console.log(upcoming, ")))))))))");
   return upcoming;
 };
+
+console.log(getCalendar(), "@@@@@");
 
 const Calendar = () => {
   const [calendar, grabEvents] = useState([]);
 
   useEffect(() => {
-    grabEvents(getCalendar());
+    const nextEvents = async () => {
+      const nextEvent = await getCalendar();
+      grabEvents(nextEvent);
+    };
+    nextEvents();
   }, []);
   console.log(calendar, "$$$$$$$");
 
   return (
     <View style={styles.widget}>
-      <Text style={styles.themedText}>This is a Calendar</Text>
+      <Text style={styles.themedText}>
+        {calendar.length ? calendar[0].title : null}
+      </Text>
     </View>
   );
 };
