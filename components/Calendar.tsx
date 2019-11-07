@@ -16,11 +16,8 @@ const getCalendar = async () => {
   fourDaysOut.setDate(day.getDate() + 4);
 
   const upcoming = await calendar.getEventsAsync(calendarIDs, day, fourDaysOut);
-  // console.log(upcoming, ")))))))))");
   return upcoming;
 };
-
-console.log(getCalendar(), "@@@@@");
 
 const Calendar = () => {
   const [calendar, setCalendar] = useState([]);
@@ -32,6 +29,8 @@ const Calendar = () => {
     };
     nextEvents();
   }, []);
+
+  console.log(calendar, "****");
 
   return (
     <View style={styles.widget}>
