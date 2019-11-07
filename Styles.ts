@@ -18,13 +18,13 @@ export default StyleSheet.create({
     borderWidth: 1,
     borderColor: "white"
   },
-  scrollWidget: {
-    alignItems: "center",
-    justifyContent: "center"
-  },
   themedText: {
     color: "white",
     fontFamily: "HelveticaNeue-UltraLight",
     fontSize: 100
+  },
+  fixToText: {
+    flexDirection: "row",
+    justifyContent: "space-between"
   }
 });

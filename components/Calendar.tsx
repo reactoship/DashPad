@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text, ScrollView } from "react-native";
+import { View, Text, ScrollView, SafeAreaView } from "react-native";
 import styles from "../Styles";
 import * as calendar from "expo-calendar";
 import * as Permissions from "expo-permissions";
@@ -30,18 +30,43 @@ const Calendar = () => {
     nextEvents();
   }, []);
 
-  console.log(calendar, "****");
+  let today = calendar.filter(
+    holiday => holiday.originalStartDate === new Date()
+  );
+
+  let upcoming = calendar.filter(
+    holiday => holiday.originalStartDate !== new Date()
+  );
+  console.log(upcoming, "****");
 
   return (
-    <View style={styles.widget}>
-      {calendar.map(holiday => {
-        return (
-          <Text style={styles.themedText} key={holiday.id}>
-            {holiday.title}
-          </Text>
-        );
-      })}
-    </View>
+    <SafeAreaView style={styles.widget}>
+      <ScrollView>
+        <Text style={styles.themedText}>On Today's Agenda</Text>
+        {today.length ? (
+          today.map(holiday => {
+            return (
+              <Text styles={styles.themedText} key={holiday.id}>
+                {holiday.title}
+              </Text>
+            );
+          })
+        ) : (
+          <Text style={styles.themedText}>No events today</Text>
+        )}
+        <Text style={styles.themedText}>Upcoming Events</Text>
+
+        {upcoming.length ? (
+          upcoming.map(holiday => (
+            <Text style={styles.themedText} key={holiday.id}>
+              {holiday.title}
+            </Text>
+          ))
+        ) : (
+          <Text style={styles.themedText}>Go make some plans</Text>
+        )}
+      </ScrollView>
+    </SafeAreaView>
   );
 };
 
