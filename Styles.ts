@@ -1,26 +1,30 @@
-import { StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, TouchableWithoutFeedback } from "react-native";
 
 export default StyleSheet.create({
   container: {
-    flexDirection: 'row',
+    flexDirection: "row",
     flex: 1,
-    flexWrap: 'wrap',
-    color: 'white'
+    flexWrap: "wrap",
+    color: "white"
   },
   widget: {
-    color: 'white',
-    width: '50%',
-    height: '50%',
-    backgroundColor: 'black',
-    justifyContent: 'center',
-    textAlign: 'center',
-    alignItems: 'center',
+    color: "white",
+    width: "50%",
+    height: "50%",
+    backgroundColor: "black",
+    justifyContent: "center",
+    textAlign: "center",
+    alignItems: "center",
     borderWidth: 1,
-    borderColor: 'white'
+    borderColor: "white"
+  },
+  scrollWidget: {
+    alignItems: "center",
+    justifyContent: "center"
   },
   themedText: {
-    color: 'white',
-    fontFamily: 'HelveticaNeue-UltraLight',
+    color: "white",
+    fontFamily: "HelveticaNeue-UltraLight",
     fontSize: 100
   }
-})
+});

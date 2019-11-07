@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { View, Text } from "react-native";
+import { View, Text, ScrollView } from "react-native";
 import styles from "../Styles";
 import * as calendar from "expo-calendar";
 import * as Permissions from "expo-permissions";
@@ -23,22 +23,25 @@ const getCalendar = async () => {
 console.log(getCalendar(), "@@@@@");
 
 const Calendar = () => {
-  const [calendar, grabEvents] = useState([]);
+  const [calendar, setCalendar] = useState([]);
 
   useEffect(() => {
     const nextEvents = async () => {
       const nextEvent = await getCalendar();
-      grabEvents(nextEvent);
+      setCalendar(nextEvent);
     };
     nextEvents();
   }, []);
-  console.log(calendar, "$$$$$$$");
 
   return (
     <View style={styles.widget}>
-      <Text style={styles.themedText}>
-        {calendar.length ? calendar[0].title : null}
-      </Text>
+      {calendar.map(holiday => {
+        return (
+          <Text style={styles.themedText} key={holiday.id}>
+            {holiday.title}
+          </Text>
+        );
+      })}
     </View>
   );
 };
