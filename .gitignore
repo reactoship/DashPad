@@ -13,3 +13,4 @@ apiGoogleconfig.json
 
 # macOS
 .DS_Store
+ApiKeys.ts

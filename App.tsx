@@ -7,7 +7,6 @@ import Traffic from './components/Traffic'
 import Weather from './components/Weather'
 
 export default function App () {
-  console.log('where are you')
   return (
     <View style={styles.container}>
       <Clock />
