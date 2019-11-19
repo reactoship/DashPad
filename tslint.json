@@ -12,8 +12,8 @@
     "member-ordering": false,
     "jsx-no-lambda": false,
     "jsx-boolean-value": false,
-    "semicolon": [true, "never"]
-
+    "semicolon": [true, "never"],
+    "jsx-no-multiline-js": false
   },
   "rulesDirectory": []
 }
