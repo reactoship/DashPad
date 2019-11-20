@@ -9,10 +9,10 @@ const getTrafficInfo = async (
   try {
     const response = await fetch(googleMapsEndPoint)
     const data = await response.json()
-    console.log('data:', data)
-    return data.rows[0].elements[0].duration.text
+
+    if (data.rows[0]) return data.rows[0].elements[0].duration.text
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 }
 

@@ -1,7 +1,7 @@
 const slugAddress = (address) => {
-  console.log('preAddress', address)
+  // console.log('preAddress', address)
   address = address.replace(/\s/g, '+')
-  console.log('address:', address)
+  // console.log('address:', address)
   return address
 }
 

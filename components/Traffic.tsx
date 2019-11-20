@@ -4,24 +4,26 @@ import styles from '../Styles'
 import useLocation from '../hooks/useLocation'
 import EnterWorkAddress from './EnterWorkAdress'
 import getTrafficInfo from '../utility/getTrafficInfo'
+import slugAddress from '../utility/slugAddress'
 
 const Traffic = () => {
   const { long, lat } = useLocation()
-  const [homeAddress, setHomeAddress] = useState()
+  const [homeAddress, setHomeAddress] = useState('')
   const [workAddress, setWorkAddress] = useState('')
   const [timeToWork, setTimeToWork] = useState('')
   const [changeLocationFlag, setChangeLocationFlag] = useState(false)
+
   useEffect(() => {
     const getWorkLocation = async () => {
       try {
         const savedWorkAddress = await AsyncStorage.getItem('workAddress')
         const savedHomeAddress = await AsyncStorage.getItem('homeAddress')
         if (savedWorkAddress) {
-          setChangeLocationFlag(false)
+          // setChangeLocationFlag(false)
           setWorkAddress(savedWorkAddress)
         }
         if (savedHomeAddress) {
-          setChangeLocationFlag(false)
+          // setChangeLocationFlag(false)
           setHomeAddress(savedHomeAddress)
         }
 
@@ -34,7 +36,9 @@ const Traffic = () => {
 
   useEffect(() => {
     const getTraffic = async () => {
-      setTimeToWork(await getTrafficInfo(homeAddress, workAddress))
+      const slugHomeAddress = slugAddress(homeAddress)
+      const slugWorkAddress = slugAddress(workAddress)
+      setTimeToWork(await getTrafficInfo(slugHomeAddress, slugWorkAddress))
     }
     getTraffic()
 
@@ -47,7 +51,13 @@ const Traffic = () => {
   return (
     <View style={styles.widget}>
       {!changeLocationFlag ?
-        <Text style={styles.themedText}> {timeToWork} to get to Work</Text>
+        (<View>
+        <Text style={styles.themedText}>
+          {timeToWork} to get to Work
+        </Text>
+          <Button title='reset location' onPress={clearAddresses} />
+          </View>
+          )
         : (
         <EnterWorkAddress
           setWorkAddress={setWorkAddress}
@@ -58,7 +68,6 @@ const Traffic = () => {
         />
         )
       }
-      <Button title='reset location' onPress={clearAddresses} />
     </View>
 
   )

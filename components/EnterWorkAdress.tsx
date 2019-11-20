@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
-import { TextInput, View, Button, AsyncStorage } from 'react-native'
+import { TextInput, View, Button, AsyncStorage, KeyboardAvoidingView, Text } from 'react-native'
+import { Input } from 'react-native-elements'
 import slugAddress from '../utility/slugAddress'
 import styles from '../Styles'
 import { Formik } from 'formik'
@@ -10,8 +11,8 @@ const EnterWorkAddress = (props) => {
     <Formik
       initialValues={{ workAddress, homeAddress }}
       onSubmit={async (values) => {
-        const newWorkAddress = slugAddress(values.workAddress)
-        const newHomeAddress = slugAddress(values.homeAddress)
+        const newWorkAddress = values.workAddress
+        const newHomeAddress = values.homeAddress
         setWorkAddress(newWorkAddress)
         setHomeAddress(newHomeAddress)
         await AsyncStorage.setItem('workAddress', newWorkAddress)
@@ -20,25 +21,31 @@ const EnterWorkAddress = (props) => {
       }}
     >
       {({ handleChange, handleBlur, handleSubmit, values }) => (
-        <View style={{ backgroundColor: 'white' }}>
-          <TextInput
+        <KeyboardAvoidingView behavior={'padding'} style={{ width: '100%' }}>
+          <Input
             // style={styles.themedText}
             placeholder={'work address'}
             placeholderTextColor={'grey'}
             onChangeText={handleChange('workAddress')}
             onBlur={handleBlur('workAddress')}
             value={values.workAddress}
+            // containerStyle={{ backgroundColor: 'white', alignSelf: 'center' }}
+            label={'work address'}
+            inputStyle={{ textAlign: 'center', ...styles.themedText, fontSize: 40 }}
+
           />
-          <TextInput
+          <Input
             // style={styles.themedText}
             placeholder={'home address'}
             placeholderTextColor={'grey'}
             onChangeText={handleChange('homeAddress')}
             onBlur={handleBlur('homeAddress')}
             value={values.homeAddress}
+            label={'home address'}
+            inputStyle={{ textAlign: 'center', ...styles.themedText, fontSize: 40 }}
           />
-          <Button onPress={handleSubmit} title={'what'}/>
-        </View>
+          <Button onPress={handleSubmit} title={'submit'}/>
+        </KeyboardAvoidingView>
       )}
     </Formik>
   )

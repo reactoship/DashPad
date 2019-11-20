@@ -10,7 +10,7 @@ const getWeather = async (latitude: number, longitude: number) => {
     }
     return weather
   } catch (err) {
-    console.log(err)
+    console.error(err)
   }
 }
 
