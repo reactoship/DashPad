@@ -6,7 +6,8 @@ import Calendar from "./components/Calendar";
 import Traffic from "./components/Traffic";
 import Weather from "./components/Weather";
 
-export default function App() {
+
+export default function App () {
   return (
     <View style={styles.container}>
       <Clock />
